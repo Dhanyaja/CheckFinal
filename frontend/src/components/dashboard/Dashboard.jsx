@@ -54,7 +54,7 @@ const Dashboard = () => {
                   <LogOut className="h-4 w-4 mr-2" />
                   Logout
                 </Button>
-                <ThemeToggle />
+                <ThemeToggle className="cursor-pointer" />
               </div>
             </div>
           </div>
