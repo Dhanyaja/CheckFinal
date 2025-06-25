@@ -29,7 +29,7 @@ const LandingPage = ({ onShowAuth }) => {
               <Button onClick={onShowAuth} className="cursor-pointer">
                 Get Started
               </Button>
-              <ThemeToggle className="cursor-pointer" /> 
+              <ThemeToggle /> 
             </div>
           </div>
         </div>
