@@ -50,40 +50,6 @@ const StudyQueue = () => {
     }
   };
 
-  // const handleAnswer = async (rating) => {
-  //   if (!currentCard) return;
-  //   try {
-  //     await axios.post(
-  //       `${url}/api/card/review`,
-  //       {
-  //         cardId: currentCard._id,
-  //         quality: rating, // 0-5
-  //       },
-  //       {
-  //         headers: { token },
-  //       }
-  //     );
-
-  //     const nextIndex = currentIndex + 1;
-  //     if (nextIndex >= dueCards.length) {
-  //       // All cards for this batch done, refresh
-  //       await fetchDueCards();
-  //     } else {
-  //       setCurrentIndex(nextIndex);
-
-  //       // Update progress
-  //       const done = totalTodayCount - (dueCards.length - nextIndex);
-  //       const progressVal =
-  //         totalTodayCount > 0 ? (done / totalTodayCount) * 100 : 100;
-  //       setProgress(progressVal);
-  //       setShowAnswer(false);
-  //       dueCardsFunc();
-  //     }
-  //   } catch (error) {
-  //     console.error("Error submitting review", error);
-  //   }
-  // };
-
   const handleAnswer = async (rating) => {
     if (!currentCard) return;
 
@@ -183,28 +149,28 @@ const StudyQueue = () => {
                   <Button
                     variant="outline"
                     onClick={() => handleAnswer(0)}
-                    className="text-red-600 border-red-200 hover:bg-red-50"
+                    className="text-red-600 border-red-200 hover:text-red-600"
                   >
                     Forgot
                   </Button>
                   <Button
                     variant="outline"
                     onClick={() => handleAnswer(2)}
-                    className="text-orange-600 border-orange-200 hover:bg-orange-50"
+                    className="text-orange-600 border-orange-200 hover:text-orange-600"
                   >
                     Hard
                   </Button>
                   <Button
                     variant="outline"
                     onClick={() => handleAnswer(3)}
-                    className="text-blue-600 border-blue-200 hover:bg-blue-50"
+                    className="text-blue-600 border-blue-200 hover:text-blue-600"
                   >
                     Good
                   </Button>
                   <Button
                     variant="outline"
                     onClick={() => handleAnswer(5)}
-                    className="text-green-600 border-green-200 hover:bg-green-50"
+                    className="text-green-600 border-green-200 hover:text-green-600"
                   >
                     Easy
                   </Button>

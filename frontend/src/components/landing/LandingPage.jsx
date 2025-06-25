@@ -93,7 +93,7 @@ const LandingPage = ({ onShowAuth }) => {
             <Card>
               <CardHeader>
                 <Users className="h-12 w-12 text-indigo-600 mb-4" />
-                <CardTitle>Share Knowledge</CardTitle>
+                <CardTitle>Speed Memorization</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600">
