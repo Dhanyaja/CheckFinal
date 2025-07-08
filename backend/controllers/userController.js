@@ -2,6 +2,7 @@ import userModel from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import validator from "validator";
+import cardModel from "../models/cardModel.js";
 
 import fs from "fs";
 
@@ -66,6 +67,12 @@ const adduser = async (req, res) => {
     })
 
     const user = await newUser.save();
+    await cardModel.create({
+      userId: user._id,
+      cards: [],
+      totalCards: 0,
+      reviewCards: 0
+    })
     const token = createToken(user._id);
     res.json({success: true, token, name: name, userId: user._id})
   } catch (error) {
