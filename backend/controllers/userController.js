@@ -4,12 +4,14 @@ import bcrypt from "bcrypt";
 import validator from "validator";
 import cardModel from "../models/cardModel.js";
 
-import fs from "fs";
+// import fs from "fs";
 
 
 // login
 const loginuser = async (req, res) => {
   const {email, password} = req.body;
+
+  console.log("Login request received");
 
   try{
     const user = await userModel.findOne({email});
@@ -67,20 +69,23 @@ const adduser = async (req, res) => {
     })
 
     const user = await newUser.save();
-    await cardModel.create({
-      userId: user._id,
-      cards: [],
-      totalCards: 0,
-      reviewCards: 0
-    })
+    console.log("User created successfully", user._id);
+    // await cardModel.create({
+    //   userId: user._id,
+    //   cards: [],
+    //   totalCards: 0,
+    //   reviewCards: 0,
+    //   deckId: null,
+    //   userId: user._id,
+
+    // })
+    console.log("Card model created");
     const token = createToken(user._id);
     res.json({success: true, token, name: name, userId: user._id})
   } catch (error) {
-    console.log(error);
-    res.json({success: false, message: "Error"})
+    console.log("Error in catch: ", error);
+    res.json({success: false, message: "Error in catch block"})
   }
 }
 
 export { adduser, loginuser };
-
-

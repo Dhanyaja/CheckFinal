@@ -4,7 +4,8 @@ import { createContext, useEffect, useState } from "react";
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
-  const url = "https://checkfinal.onrender.com";
+  // const url = "https://checkfinal.onrender.com";
+  const url = "http://localhost:4000"; // Change this to your backend URL
   const token = localStorage.getItem("token");
   const [isLoading, setIsLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -22,8 +23,8 @@ const StoreContextProvider = (props) => {
     fetchDecks();
     cardsCountFunc();
     dueCardsFunc();
-    const storedTheme = localStorage.getItem("theme")
-    if(storedTheme === "dark"){
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme === "dark") {
       setIsDark(true);
       document.documentElement.classList.add("dark");
     } else {
@@ -38,7 +39,8 @@ const StoreContextProvider = (props) => {
       const response = await axios.get(newUrl, {
         headers: { token },
       });
-      const sortedDecks = response.data.data.sort(
+      const deckData = response.data?.data || [];
+      const sortedDecks = deckData.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
       setDecks(sortedDecks);
@@ -64,9 +66,10 @@ const StoreContextProvider = (props) => {
     const newUrl = `${url}/api/card/due`;
     try {
       const response = await axios.get(newUrl, { headers: { token: token } });
-      setDueCardsLength(response.data.data.length);
+      setDueCardsLength((response.data?.data || []).length);
     } catch (error) {
       console.log(error);
+      setDueCardsLength(0);
     }
   };
 
@@ -81,8 +84,6 @@ const StoreContextProvider = (props) => {
       setIsDark(true);
     }
   };
-
-  
 
   const contextValue = {
     url,

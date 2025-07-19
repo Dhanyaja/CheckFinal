@@ -14,8 +14,11 @@ const AuthModal = ({ isOpen, onClose }) => {
     name: "",
     email: "",
     password: "",
+    studyStreak: 0,
+    totalCardsStudied: 0,
+    lastStudyDate: new Date(),
   });
-  const [token, setToken] = useState("")
+  const [token, setToken] = useState("");
 
   const {
     url,
@@ -36,7 +39,7 @@ const AuthModal = ({ isOpen, onClose }) => {
     try {
       let newUrl = `${url}/api/user/loginUser`;
       const response = await axios.post(newUrl, loginData);
-      console.log("Onlogin executed: ", response.data)
+      console.log("Onlogin executed: ", response.data);
       if (response.data.success) {
         setToken(response.data.token);
         localStorage.setItem("token", response.data.token);
@@ -62,28 +65,61 @@ const AuthModal = ({ isOpen, onClose }) => {
     setIsLoading(true);
     console.log("onregister executed");
     try {
-      let newUrl = `${url}/api/user/adduser`
+      let newUrl = `${url}/api/user/adduser`;
       const response = await axios.post(newUrl, registerData);
+      console.log("Onregister executed: ", response.data);
       if (response.data.success) {
         setToken(response.data.token);
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", response.data.name);
+        localStorage.setItem("userId", response.data.userId);
         onClose();
         setIsAuthenticated(true);
         setUserName(response.data.name);
         setUserId(localStorage.getItem("userId"));
       } else {
+        console.log("Else block from onregister")
         alert(response.data.message);
       }
     } catch (error) {
       console.log(error);
+      console.log("Error in onregister")
     } finally {
       setIsLoading(false);
     }
   };
+  // const onRegister = async (event) => {
+  //   event.preventDefault();
+  //   setIsLoading(true);
+  //   console.log("onregister executed");
+  //   try {
+  //     let newUrl = `${url}/api/user/adduser`
+  //     const response = await axios.post(newUrl, registerData);
+  //     if (response.data.success) {
+  //       setToken(response.data.token);
+  //       localStorage.setItem("token", response.data.token);
+  //       onClose();
+  //       setIsAuthenticated(true);
+  //       setUserName(response.data.name);
+  //       setUserId(localStorage.getItem("userId"));
+  //     } else {
+  //       alert(response.data.message);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   return (
     <div>
-      <Dialog open={isOpen} onOpenChange={(open) => {if(!open) onClose();}}>
+      <Dialog
+        open={isOpen}
+        onOpenChange={(open) => {
+          if (!open) onClose();
+        }}
+      >
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 relative">

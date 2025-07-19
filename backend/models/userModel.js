@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     password: {type: String, required: true, minlength: 6},
     studyStreak: {type: Number, default: 0},
     totalCardsStudied: {type: Number, default: 0},
-    lastStudyDate: {type: Date}
+    lastStudyDate: {type: Date, default: Date.now}
 }, {minimize: false})
 
 const userModel = mongoose.models.user || mongoose.model("user", userSchema);
