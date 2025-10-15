@@ -8,7 +8,7 @@ import { Button } from "../ui/Button";
 import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
 
-const AuthModal = ({ isOpen, onClose }) => {
+const   AuthModal = ({ isOpen, onClose }) => {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [registerData, setRegisterData] = useState({
     name: "",
@@ -88,29 +88,6 @@ const AuthModal = ({ isOpen, onClose }) => {
       setIsLoading(false);
     }
   };
-  // const onRegister = async (event) => {
-  //   event.preventDefault();
-  //   setIsLoading(true);
-  //   console.log("onregister executed");
-  //   try {
-  //     let newUrl = `${url}/api/user/adduser`
-  //     const response = await axios.post(newUrl, registerData);
-  //     if (response.data.success) {
-  //       setToken(response.data.token);
-  //       localStorage.setItem("token", response.data.token);
-  //       onClose();
-  //       setIsAuthenticated(true);
-  //       setUserName(response.data.name);
-  //       setUserId(localStorage.getItem("userId"));
-  //     } else {
-  //       alert(response.data.message);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
 
   return (
     <div>
